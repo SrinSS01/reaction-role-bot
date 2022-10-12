@@ -4,7 +4,7 @@
 
 - Download the jar file
 - Then open terminal and navigate to the folder where you've downloaded the jar file
-- Then type `java -jar reaction-role-bot-0.0.1.jar` and press enter.  
+- Then type `java -jar reaction_role_bot_0.0.1.jar` and press enter.  
   _example:_  
    ![start](./img/start.png)
   _This will create an **application.properties** file in a **config** folder_
