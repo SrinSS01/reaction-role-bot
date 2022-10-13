@@ -23,17 +23,15 @@ public class GuildReady extends ListenerAdapter {
             TextChannel textChannel = guild.getTextChannelById(channelId);
             if (textChannel != null) {
                 messageEmoteMap.forEach((messageId, emoteRoleMap) ->
-                        emoteRoleMap.forEach((emote, roleId) -> {
-                            System.out.println(emote);
-                                    textChannel.addReactionById(
-                                            messageId,
-                                            Emoji.fromFormatted(emote)
-                                    ).onErrorMap(err -> {
-                                        LOGGER.error("{} for message ID: {}", err.getMessage(), messageId);
-                                        return null;
-                                    }).queue();
-                                }
-                        )
+                    emoteRoleMap.forEach((emote, roleId) ->
+                        textChannel.addReactionById(
+                                messageId,
+                                Emoji.fromFormatted(emote)
+                        ).onErrorMap(err -> {
+                            LOGGER.error("{} for message ID: {}", err.getMessage(), messageId);
+                            return null;
+                        }).queue()
+                    )
                 );
             }
         });
