@@ -1,6 +1,10 @@
 # Reaction role bot
 
-## get started
+## Prerequisite
+
+Create a bot application. Detailed instructions are available [here](https://github.com/SrinSS01/reaction-role-bot/blob/main/BOT.md)
+
+## Get started
 
 - Download the jar file
 - Then open terminal and navigate to the folder where you've downloaded the jar file
