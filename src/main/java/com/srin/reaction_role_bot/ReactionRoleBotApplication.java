@@ -38,8 +38,14 @@ public class ReactionRoleBotApplication {
 				LOGGER.info("Created config directory");
 				try (FileWriter writer = new FileWriter(properties)) {
 					writer.write("""
-                            bot-token=token
-                            """);
+						bot:
+						 token: "token"
+						 reactions:
+						   "channelId":
+							 "messageId":
+							   "[custom-Emote]": "roleId"
+							   "[unicode-Emote]": "roleId"
+					""");
 					writer.flush();
 					LOGGER.info("Created application.yml file");
 				}
