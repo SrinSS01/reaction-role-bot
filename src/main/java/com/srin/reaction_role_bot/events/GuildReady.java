@@ -1,5 +1,8 @@
 package com.srin.reaction_role_bot.events;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.srin.reaction_role_bot.ReactionRoleBotApplication;
 import lombok.AllArgsConstructor;
 import net.dv8tion.jda.api.entities.Guild;
@@ -11,6 +14,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 @AllArgsConstructor
 public class GuildReady extends ListenerAdapter {
     ReactionRoleBotApplication.Config config;
+    private static final Logger LOGGER = LoggerFactory.getLogger(GuildReady.class);
 
     @Override
     public void onGuildReady(GuildReadyEvent event) {
@@ -24,7 +28,10 @@ public class GuildReady extends ListenerAdapter {
                                     textChannel.addReactionById(
                                             messageId,
                                             Emoji.fromFormatted(emote)
-                                    ).queue();
+                                    ).onErrorMap(err -> {
+                                        LOGGER.error("{} for message ID: {}", err.getMessage(), messageId);
+                                        return null;
+                                    }).queue();
                                 }
                         )
                 );

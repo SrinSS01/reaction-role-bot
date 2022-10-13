@@ -21,6 +21,7 @@ public class Reaction extends ListenerAdapter {
 
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
+        if (event.getUserIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
         String messageId = event.getMessageId();
         String channelId = event.getChannel().getId();
 
@@ -33,7 +34,11 @@ public class Reaction extends ListenerAdapter {
         var info = messageEmoteMap.get(messageId);
         if (info != null) {
             EmojiUnion emote = event.getEmoji();
-            String emoji = emote.getFormatted();
+            String emoji = switch (emote.getType()) {
+                case CUSTOM -> emote.asCustom().getAsMention();
+                case UNICODE -> emote.asUnicode().getAsCodepoints();
+            };
+            LOGGER.info("added emoji: {} from messageId: {}", emoji, messageId);
             String roleId = info.get(emoji);
             if (roleId != null) {
                 Guild guild = event.getGuild();
@@ -46,6 +51,7 @@ public class Reaction extends ListenerAdapter {
 
     @Override
     public void onMessageReactionRemove(MessageReactionRemoveEvent event) {
+        if (event.getUserIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
         String messageId = event.getMessageId();
         String channelId = event.getChannel().getId();
 
@@ -58,7 +64,11 @@ public class Reaction extends ListenerAdapter {
         var info = messageEmoteMap.get(messageId);
         if (info != null) {
             EmojiUnion emote = event.getEmoji();
-            String emoji = emote.getFormatted();
+            String emoji = switch (emote.getType()) {
+                case CUSTOM -> emote.asCustom().getAsMention();
+                case UNICODE -> emote.asUnicode().getAsCodepoints();
+            };
+            LOGGER.info("removed emoji: {} from messageId: {}", emoji, messageId);
             String roleId = info.get(emoji);
             if (roleId != null) {
                 Guild guild = event.getGuild();

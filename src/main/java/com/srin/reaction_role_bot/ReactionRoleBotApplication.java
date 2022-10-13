@@ -71,12 +71,13 @@ public class ReactionRoleBotApplication {
 					)
 					.setActivity(Activity.playing("reaction roles")).build();
 			new Thread(() -> {
-				Scanner sc = new Scanner(System.in);
-				while (true) {
-					String input = sc.nextLine();
-					if (input.equalsIgnoreCase("stop")) {
-						jda.shutdownNow();
-						break;
+				try (Scanner sc = new Scanner(System.in)) {
+					while (true) {
+						String input = sc.nextLine();
+						if (input.equalsIgnoreCase("stop")) {
+							jda.shutdownNow();
+							break;
+						}
 					}
 				}
 			}, "Stop Thread").start();
