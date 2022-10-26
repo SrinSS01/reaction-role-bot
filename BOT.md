@@ -27,10 +27,11 @@
 - From the check-boxes in the right click on `bot` and `application.commands`
    ![dev8](/img/dev8.png)
 - Next scroll down to `BOT PERMISSIONS` section and select the required permissions for the bot  
-  **NOTE: The following permissions must be selected**
-  1. `Manage Roles`
-  2. `Send Messages`
+  **NOTE: Select any permissions you want the bot to have depending on its functionality. ex.:**
+  1. `Send Messages`
+  2. `Send Messages in Threads`
   3. `Use Slash Commands`
+  4. `Embed Links`
    ![dev9](/img/dev9.png)
 - Next Scroll down a bit and you'll see an url being generated  
   copy and paste it in a new tab in your browser
